@@ -1,41 +1,74 @@
 const router = require("express").Router();
 const {
-    getAllThought,
-    addThought,
-    removeThought,
-    addReply,
-    removeReply,
-    getThoughtId
-  } = require('../../controllers/Thought-controller');
+    getAllThought,    // this works 08/14/2022 12:27pm
+    addThought,       // this works 08/14/2022 01:05pm
+    getThoughtById,   // this works 08/14/2022 12:32pm
+    updateThought,    // this works 08/14/2022 01:39pm
+    deleteThought,    // this works 08/14/2022 01:38pm
+    addReaction,      // this works 08/14/2022 02:18pm
+    deleteReaction    // this works 08/14/2022 02:41pm
 
-  router
+  } = require('../../controllers/thought-controller');
+
+
+//  GET all and POST at /api/thoughts
+router
   .route("/")
   .get(getAllThought)
   .post(addThought);
 
-// /api/thoughts
-//router.route("/").get(getAllThought);
 
-// /api/thoughts/<thoughtId>
-router.route("/:thoughtId").post(addThought);
+// Set up GET one, PUT, and DELETE at /api/thoughts/:id
+router
+  .route("/:id")
+  .get(getThoughtById)
+  .put(updateThought)
+  .delete(deleteThought)
 
-router.route("/").post(addThought);
-
-// /api/thoughts
-router.route("/thoughts/:username").post(addThought);
-
-// /api/Thoughts/<thoughtId>/<thoughtId>
-router.route("/:thoughtId").delete(removeThought);
-
-router.route("/:userId/:thoughtId").delete(removeThought);
-
+  // removeThought,
+  // updateThought,
+  // addReaction,
+  // removeReaction,
+  // getThoughtById
 
 
 router
-  .route('/:id')
-  .get(getThoughtId)
-  .put(addReply)
-  .delete(removeThought)
+  .route("/:id/reactions")
+  .post(addReaction)
+
+
+router.route("/:thoughtId/:reactionId").delete(deleteReaction);
+
+
+  // /api/thoughts
+//router.route("/").get(getAllThought);
+
+// /api/thoughts/<thoughtId>
+// router.route("/:thoughtId").post(addThought);
+
+// router.route("/").post(addThought);
+
+// /api/thoughts
+// router.route("/thoughts/:username").post(addThought);
+
+// /api/Thoughts/<thoughtId>/<thoughtId>
+// router.route("/:thoughtId").delete(removeThought);
+
+
+
+// /api/thoughts/:thoughtId/reactions
+// router.route("/:thoughtId/reactions").put(addReaction);
+
+
+
+
+// router.route("/")
+
+// router
+  // .route('/:id')
+  // .get(getThoughtId)
+  // .put(updateThought)
+  // .delete(removeThought)
 
 
 // router.route('/:pizzaId/:ThoughtId/:replyId').delete(removeReply);  
