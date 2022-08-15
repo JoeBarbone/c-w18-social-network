@@ -24,6 +24,10 @@ const UserController = {
             path: "thoughts",
             select: "-__v"
         })
+        .populate({
+            path: "friends",
+            select: "-__v"
+        })
         .select("-__v")
         .then(dbUserData => {
             // if no User is found, send 404
@@ -70,7 +74,46 @@ const UserController = {
             res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
-    }
+    },
+
+    // add friends
+    addFriend({ params, body }, res) {
+  
+        User.findOneAndUpdate(
+          { _id: params.id },
+          { $push: { friends: params.friendId } },
+          { new: true }
+        )
+          .then(dbUserData => {
+            if (!dbUserData) {
+              res.status(404).json({ message: 'ERROR Adding Friend: No users found with this id!' });
+              return;
+            }
+            res.json(dbUserData);
+          })
+          .catch(err => res.json(err));
+    },
+
+
+    // delete friends
+    deleteFriend({ params, body }, res) {
+
+        console.log("made it to delete friends!");
+  
+        User.findOneAndUpdate(
+          { _id: params.id },
+          { $pull: { friends: params.friendId } },
+          { new: true }
+        )
+          .then(dbUserData => {
+            if (!dbUserData) {
+              res.status(404).json({ message: 'ERROR Deleting Friend: No users found with this id!' });
+              return;
+            }
+            res.json(dbUserData);
+          })
+          .catch(err => res.json(err));
+    },
     
 };
 
