@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    xbackground-color: blue;
+    height: 100vh;
+}
+
+.content {
+    display: flex;
+}
+
+.users {
+    border: 1px solid black;
+    padding: 50px;
+    width: 50%;
+    
+}
+
+.thoughts {
+    border: 1px solid black;
+    padding: 50px;
+    width: 50%;
+}
+
+input {
+    width: 22%;
+}
+
+table {
+    table-layout: fixed;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: navy;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+button {
+    padding: 20px 100px;
+    background-color: navy;
+    color: white;
+}
